@@ -1,8 +1,12 @@
 #!/bin/bash -x
 randomNum=$((RANDOM%2))
-if [ $randomNum -eq 0 ]
+isFullTime=1
+wagePerHr=20
+fullDayHr=8
+if [ $randomNum -eq 1 ] && [ isFullTime ]
 then
-	echo "Employee is absent"
+	salary=$((wagePerHr*fullDayHr))
+	echo "Salary per day: $salary"
 else
-	echo "Employee is present"
+	echo "Employee is absent, so cannott calculate wages"
 fi
