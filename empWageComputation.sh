@@ -19,27 +19,39 @@ function calculateSalaryForOneDayPartTime() {
    salary=$(($partTimeHours*$wagePerHr))
 }
 
-case $randomNum in
-$isFullTime)
-	totalHrs=100
+i=1
+arr[$i]=$i
+for ((i;i<=7;i++))
+do
+	if [ $randomNum -eq $isFullTime ]
+	then
+		arr[$i]=$salary
 
-	calculateSalaryForFullMonth
-	echo "Salary for 1 month (full-time): $salary"
+		totalHrs=100
 
-   calculateSalaryForOneDayFullTime
-	echo "Salary for 1 day (full-time): $salary"
-;;
-$isPartTime)
-	totalHrs=60
+	   calculateSalaryForFullMonth
+	   echo "Salary for 1 month (full-time): $salary"
 
-	calculateSalaryForFullMonth
-	echo "Salary for 1 month (part-time): $salary"
+	   calculateSalaryForOneDayFullTime
+	   echo "Salary for 1 day (full-time): $salary"
+		echo "${arr[@]}"
 
-	calculateSalaryForOneDayPartTime
-	echo "Salary for 1 day (part-time): $salary"
-;;
-*)
-	totalHrs=0
-	echo "Employee is absent, so cannot calculate wage"
-;;
-esac
+	elif [ $randomNum -eq $isPartTime ]
+	then
+   	arr[$i]=$salary
+
+		totalHrs=60
+
+	   calculateSalaryForFullMonth
+	   echo "Salary for 1 month (part-time): $salary"
+
+	   calculateSalaryForOneDayPartTime
+	   echo "Salary for 1 day (part-time): $salary"
+ 	   echo "${arr[@]}"
+
+	else
+		totalHr=0
+		echo "Salary cannot be calculated"
+      echo "${arr[@]}"
+	fi
+done
